@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg-color: #f4f6f9; 
+    --envelope-color: #0b2545; 
+    --envelope-dark: #06152a; 
+    --accent-tan: #c8b8a6; /* Beige original */
+    --text-dark: #3a3a3a;
+    --text-light: #777777;
+    --bg-white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* === EL SOBRE === */
+.experience-container {
+    width: 100vw; height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    perspective: 1200px;
+}
+
+.envelope-wrapper {
+    position: relative; width: 420px; height: 280px;
+    transition: opacity 1s ease, transform 1s ease; z-index: 10;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.envelope, .envelope-back, .envelope-front { position: absolute; width: 100%; height: 100%; border-radius: 4px; }
+.envelope-back { background-color: var(--envelope-dark); }
+.envelope-front { background-color: var(--envelope-color); clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%); z-index: 3; }
+
+.card-preview {
+    position: absolute; bottom: 5px; left: 15px; right: 15px; height: 95%;
+    background-color: var(--bg-white); border-radius: 4px 4px 0 0;
+    z-index: 2; transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    padding: 10px; display: flex; justify-content: center; align-items: flex-start;
+}
+.card-preview-border {
+    width: 100%; height: 100%; border: 1px solid var(--accent-tan);
+    display: flex; justify-content: center; padding-top: 40px;
+}
+.card-preview span { font-family: 'Alex Brush', cursive; font-size: 2rem; color: var(--accent-tan); }
+
+.envelope-flap {
+    position: absolute; top: 0; left: 0; width: 100%; height: 65%;
+    background-color: var(--envelope-color); clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 4; border-radius: 4px 4px 0 0;
+}
+
+.wax-seal {
+    position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%);
+    width: 60px; height: 60px;
+    background: radial-gradient(circle at 30% 30%, #f3e5ab, #d4af37 40%, #aa7c11 80%, #5a4005);
+    border-radius: 48% 52% 51% 49% / 50% 48% 52% 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 5; cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.4s, transform 0.4s;
+}
+.wax-seal span { font-family: 'Alex Brush', cursive; font-size: 30px; color: #4a3304; }
+.wax-seal:hover { transform: translate(-50%, -50%) scale(1.05); }
+
+/* Animación de apertura */
+.envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+.envelope-wrapper.open .wax-seal { opacity: 0; pointer-events: none; }
+.envelope-wrapper.extract .card-preview { transform: translateY(-160px); }
+.envelope-wrapper.fade-out { opacity: 0; transform: scale(0.8) translateY(100px); pointer-events: none; }
+
+/* === LA TARJETA FINAL (MOBILE LAYOUT) === */
+.card-page {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
+    display: flex; justify-content: center;
+    opacity: 0; transform: scale(0.95); transition: transform 1.2s ease, opacity 1s ease;
+    z-index: 5; overflow-y: auto; background-color: #333;
+}
+
+.card-page.show { transform: scale(1); opacity: 1; }
+.hidden { display: none !important; }
+
+.mobile-layout {
+    width: 100%;
+    max-width: 430px;
+    background-color: #ffffff; /* Fondo totalmente blanco garantizado */
+    min-height: 100vh;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    color: var(--text-dark);
+    padding-bottom: 60px;
+}
+
+/* === COMPONENTES DE LA ONE PAGE === */
+
+/* Hero */
+.hero-section { width: 100%; height: 350px; overflow: hidden; }
+.hero-img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Audio Player */
+.audio-section { background-color: #ffffff; padding: 15px 30px; border-bottom: 1px solid #eee; display: flex; justify-content: center; }
+.custom-audio-player { display: flex; align-items: center; gap: 15px; width: 100%; max-width: 300px; }
+.play-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-dark); }
+.progress-bar-container { flex-grow: 1; height: 4px; background-color: #e0e0e0; border-radius: 2px; position: relative; }
+.progress-bar { width: 30%; height: 100%; background-color: var(--accent-tan); border-radius: 2px; }
+.audio-icon { font-size: 1.2rem; color: var(--text-dark); }
+
+/* Secciones Generales */
+section { padding: 40px 20px; text-align: center; }
+.intro-section, .event-details, .gallery-section, .gifts-section, .rsvp-section { background-color: #ffffff; }
+
+h2 { font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 15px; font-weight: 700; color: var(--text-dark); }
+p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+
+/* Intro & Countdown */
+.script-title { font-family: 'Alex Brush', cursive; font-size: 3.5rem; color: var(--text-dark); font-weight: normal; margin-bottom: 10px; }
+.countdown-container { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+.time-box { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.circle { width: 60px; height: 60px; border-radius: 50%; background-color: #ffffff; border: 1px solid #ddd; color: var(--text-dark); display: flex; justify-content: center; align-items: center; font-size: 1.2rem; font-weight: 600; }
+.time-box span { font-size: 0.65rem; letter-spacing: 1px; color: var(--text-light); font-weight: 600; }
+
+/* Iconos */
+.icon-container { margin-bottom: 15px; color: var(--accent-tan); }
+
+/* Detalles Eventos */
+.date-time-box { display: flex; justify-content: center; align-items: center; gap: 20px; margin: 20px 0; font-weight: 600; font-size: 1.1rem; color: var(--text-dark); }
+.divider { width: 1px; height: 40px; background-color: #ccc; }
+.address { margin-bottom: 25px; }
+
+/* Botones */
+.btn-primary { 
+    display: inline-block; 
+    background-color: var(--accent-tan); 
+    color: #ffffff; 
+    border: 1px solid var(--accent-tan); 
+    text-decoration: none; 
+    padding: 12px 25px; 
+    border-radius: 4px; 
+    font-size: 0.8rem; 
+    font-weight: 600; 
+    letter-spacing: 1px; 
+    transition: opacity 0.3s; 
+}
+.btn-primary:hover { opacity: 0.8; }
+
+.btn-outline { 
+    display: inline-block; 
+    background-color: transparent; 
+    border: 1px solid var(--accent-tan); 
+    color: var(--accent-tan); 
+    text-decoration: none; 
+    padding: 12px 25px; 
+    border-radius: 4px; 
+    font-size: 0.8rem; 
+    font-weight: 600; 
+    letter-spacing: 1px; 
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+.btn-outline:hover {
+    background-color: var(--accent-tan);
+    color: #ffffff;
+}
+
+/* Share Photos */
+.share-photos { background-color: var(--accent-tan); color: white; }
+.share-photos svg { stroke: white; }
+.share-photos h2, .share-photos p { color: white; }
+.share-photos .btn-outline { border-color: white; color: white; }
+.share-photos .btn-outline:hover { background-color: white; color: var(--accent-tan); }
+
+/* Galería (Nosotros) */
+.photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; overflow: hidden; }
+.photo-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; }
+.photo-grid img.wide { grid-column: span 2; height: 220px; }
+
+/* RSVP Formulario */
+.rsvp-form { display: flex; flex-direction: column; gap: 15px; max-width: 320px; margin: 0 auto; }
+.rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: var(--text-dark); background: #ffffff; }
+.rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus { outline: none; border-color: var(--accent-tan); }
+
+
+/* =========================================
+   ANIMACIONES AL HACER SCROLL
+========================================= */
+
+/* Estado inicial oculto y preparado para animar */
+.scroll-animate {
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
+    will-change: transform, opacity;
+}
+
+/* Direcciones de entrada para las fotos */
+.img-left { transform: translateX(-60px); }
+.img-right { transform: translateX(60px); }
+
+/* Entrada de los iconos (desde abajo con escala) */
+.icon-animate { transform: translateY(30px) scale(0.8); }
+
+/* Estado final cuando son visibles en pantalla */
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translate(0) scale(1);
+}
+
+/* Efecto flotante continuo para los iconos una vez que ya aparecieron */
+.icon-animate.visible svg {
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
