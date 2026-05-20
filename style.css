@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600;700&display=swap');
 
 :root {
+    /* Paleta Original Restaurada */
     --bg-color: #f4f6f9; 
     --envelope-color: #0b2545; 
     --envelope-dark: #06152a; 
@@ -22,7 +23,9 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* === EL SOBRE === */
+/* =========================================
+   EL SOBRE (FOTORREALISTA INTACTO)
+========================================= */
 .experience-container {
     width: 100vw; height: 100vh;
     display: flex; justify-content: center; align-items: center;
@@ -31,44 +34,60 @@ body {
 
 .envelope-wrapper {
     position: relative; width: 420px; height: 280px;
-    transition: opacity 1s ease, transform 1s ease; z-index: 10;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transition: opacity 1s ease, transform 1s ease;
+    z-index: 10;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    cursor: pointer;
 }
 
-.envelope, .envelope-back, .envelope-front { position: absolute; width: 100%; height: 100%; border-radius: 4px; }
-.envelope-back { background-color: var(--envelope-dark); }
-.envelope-front { background-color: var(--envelope-color); clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%); z-index: 3; }
+.envelope, .envelope-back, .envelope-front { 
+    position: absolute; width: 100%; height: 100%; border-radius: 4px; 
+}
+.envelope-back { 
+    background-color: #040e1c; z-index: 1; box-shadow: inset 0 0 40px rgba(0,0,0,0.8); 
+}
 
 .card-preview {
     position: absolute; bottom: 5px; left: 15px; right: 15px; height: 95%;
-    background-color: var(--bg-white); border-radius: 4px 4px 0 0;
-    z-index: 2; transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color: var(--bg-white);
+    border-radius: 4px 4px 0 0; z-index: 2; 
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
     padding: 10px; display: flex; justify-content: center; align-items: flex-start;
 }
 .card-preview-border {
     width: 100%; height: 100%; border: 1px solid var(--accent-tan);
     display: flex; justify-content: center; padding-top: 40px;
 }
-.card-preview span { font-family: 'Alex Brush', cursive; font-size: 2rem; color: var(--accent-tan); }
+.card-preview span { font-family: 'Alex Brush', cursive; font-size: 2.2rem; color: var(--accent-tan); }
 
+/* Cortes del Sobre Frontal (El efecto 3D) */
+.envelope-front { background-color: transparent; z-index: 3; }
+.envelope-front::before {
+    content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 0;
+    border-left: 210px solid #071930; border-right: 210px solid #071930;
+    border-bottom: 150px solid #0a2342; border-top: 130px solid transparent;
+    filter: drop-shadow(0 -3px 4px rgba(0,0,0,0.3));
+}
+
+/* La Tapa del Sobre */
 .envelope-flap {
-    position: absolute; top: 0; left: 0; width: 100%; height: 65%;
-    background-color: var(--envelope-color); clip-path: polygon(0 0, 100% 0, 50% 100%);
+    position: absolute; top: 0; left: 0; width: 100%; height: 160px;
+    background-color: #0c284b; clip-path: polygon(0 0, 100% 0, 50% 100%);
     transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 4; border-radius: 4px 4px 0 0;
+    filter: drop-shadow(0 8px 10px rgba(0,0,0,0.6));
 }
 
+/* Sello de Lacre (Imagen PNG) */
 .wax-seal {
-    position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%);
-    width: 60px; height: 60px;
-    background: radial-gradient(circle at 30% 30%, #f3e5ab, #d4af37 40%, #aa7c11 80%, #5a4005);
-    border-radius: 48% 52% 51% 49% / 50% 48% 52% 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 5; cursor: pointer;
-    display: flex; justify-content: center; align-items: center;
+    position: absolute; top: 160px; left: 50%; transform: translate(-50%, -50%);
+    width: 75px; height: 75px; z-index: 5;
+    background-image: url('lacre.png'); background-size: contain; 
+    background-repeat: no-repeat; background-position: center; background-color: transparent; 
+    filter: drop-shadow(0 5px 6px rgba(0,0,0,0.5));
     transition: opacity 0.4s, transform 0.4s;
 }
-.wax-seal span { font-family: 'Alex Brush', cursive; font-size: 30px; color: #4a3304; }
-.wax-seal:hover { transform: translate(-50%, -50%) scale(1.05); }
+.wax-seal:hover { transform: translate(-50%, -50%) scale(1.03); }
 
 /* Animación de apertura */
 .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
@@ -76,21 +95,26 @@ body {
 .envelope-wrapper.extract .card-preview { transform: translateY(-160px); }
 .envelope-wrapper.fade-out { opacity: 0; transform: scale(0.8) translateY(100px); pointer-events: none; }
 
-/* === LA TARJETA FINAL (MOBILE LAYOUT) === */
+
+/* =========================================
+   DISEÑO ORIGINAL DE LA TARJETA ONE PAGE
+========================================= */
 .card-page {
     position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
     display: flex; justify-content: center;
-    opacity: 0; transform: scale(0.95); transition: transform 1.2s ease, opacity 1s ease;
+    opacity: 0; transform: scale(0.95);
+    transition: transform 1.2s ease, opacity 1s ease;
     z-index: 5; overflow-y: auto; background-color: #333;
 }
 
 .card-page.show { transform: scale(1); opacity: 1; }
 .hidden { display: none !important; }
 
+/* Contenedor Totalmente Blanco (Restaurado) */
 .mobile-layout {
     width: 100%;
     max-width: 430px;
-    background-color: #ffffff; /* Fondo totalmente blanco garantizado */
+    background-color: #ffffff; 
     min-height: 100vh;
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
     color: var(--text-dark);
@@ -111,7 +135,7 @@ body {
 .progress-bar { width: 30%; height: 100%; background-color: var(--accent-tan); border-radius: 2px; }
 .audio-icon { font-size: 1.2rem; color: var(--text-dark); }
 
-/* Secciones Generales */
+/* Secciones Generales (Fondo Blanco) */
 section { padding: 40px 20px; text-align: center; }
 .intro-section, .event-details, .gallery-section, .gifts-section, .rsvp-section { background-color: #ffffff; }
 
@@ -133,40 +157,20 @@ p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
 .divider { width: 1px; height: 40px; background-color: #ccc; }
 .address { margin-bottom: 25px; }
 
-/* Botones */
+/* Botones Originales */
 .btn-primary { 
-    display: inline-block; 
-    background-color: var(--accent-tan); 
-    color: #ffffff; 
-    border: 1px solid var(--accent-tan); 
-    text-decoration: none; 
-    padding: 12px 25px; 
-    border-radius: 4px; 
-    font-size: 0.8rem; 
-    font-weight: 600; 
-    letter-spacing: 1px; 
-    transition: opacity 0.3s; 
+    display: inline-block; background-color: var(--accent-tan); color: #ffffff; 
+    border: 1px solid var(--accent-tan); text-decoration: none; padding: 12px 25px; 
+    border-radius: 4px; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; transition: opacity 0.3s;
 }
 .btn-primary:hover { opacity: 0.8; }
 
 .btn-outline { 
-    display: inline-block; 
-    background-color: transparent; 
-    border: 1px solid var(--accent-tan); 
-    color: var(--accent-tan); 
-    text-decoration: none; 
-    padding: 12px 25px; 
-    border-radius: 4px; 
-    font-size: 0.8rem; 
-    font-weight: 600; 
-    letter-spacing: 1px; 
-    margin-top: 20px;
-    transition: all 0.3s ease;
+    display: inline-block; background-color: transparent; border: 1px solid var(--accent-tan); 
+    color: var(--accent-tan); text-decoration: none; padding: 12px 25px; 
+    border-radius: 4px; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; margin-top: 20px; transition: all 0.3s ease;
 }
-.btn-outline:hover {
-    background-color: var(--accent-tan);
-    color: #ffffff;
-}
+.btn-outline:hover { background-color: var(--accent-tan); color: #ffffff; }
 
 /* Share Photos */
 .share-photos { background-color: var(--accent-tan); color: white; }
@@ -185,35 +189,17 @@ p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
 .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: var(--text-dark); background: #ffffff; }
 .rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus { outline: none; border-color: var(--accent-tan); }
 
-
 /* =========================================
    ANIMACIONES AL HACER SCROLL
 ========================================= */
-
-/* Estado inicial oculto y preparado para animar */
 .scroll-animate {
-    opacity: 0;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
-    will-change: transform, opacity;
+    opacity: 0; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out; will-change: transform, opacity;
 }
-
-/* Direcciones de entrada para las fotos */
 .img-left { transform: translateX(-60px); }
 .img-right { transform: translateX(60px); }
-
-/* Entrada de los iconos (desde abajo con escala) */
 .icon-animate { transform: translateY(30px) scale(0.8); }
-
-/* Estado final cuando son visibles en pantalla */
-.scroll-animate.visible {
-    opacity: 1;
-    transform: translate(0) scale(1);
-}
-
-/* Efecto flotante continuo para los iconos una vez que ya aparecieron */
-.icon-animate.visible svg {
-    animation: floatIcon 3s ease-in-out infinite;
-}
+.scroll-animate.visible { opacity: 1; transform: translate(0) scale(1); }
+.icon-animate.visible svg { animation: floatIcon 3s ease-in-out infinite; }
 
 @keyframes floatIcon {
     0% { transform: translateY(0px); }

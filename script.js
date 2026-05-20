@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // === CUENTA REGRESIVA ===
     // Configura aquí la fecha de tu evento (Año, Mes (0-11), Día, Hora, Minuto)
     // Ejemplo: 27 de Septiembre de 2026 a las 19:00 -> (2026, 8, 27, 19, 0, 0)
-    const countdownDate = new Date(2026, 8, 27, 19, 0, 0).getTime();
+    const countdownDate = new Date(2026, 6, 1, 13, 0, 0).getTime();
 
     const updateCountdown = setInterval(() => {
         const now = new Date().getTime();

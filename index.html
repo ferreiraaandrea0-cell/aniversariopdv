@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Invitación Digital</title>
+    <title>Invitación Aniversario</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,16 +13,17 @@
         <div id="envelope-wrapper" class="envelope-wrapper">
             <div class="envelope">
                 <div class="envelope-back"></div>
+                
                 <div class="card-preview">
                     <div class="card-preview-border">
                         <span>Nuestro Aniversario</span>
                     </div>
                 </div>
+                
                 <div class="envelope-front"></div>
                 <div class="envelope-flap"></div>
-                <div id="wax-seal" class="wax-seal">
-                    <span>M</span>
-                </div>
+                
+                <div id="wax-seal" class="wax-seal"></div>
             </div>
         </div>
 
@@ -78,9 +79,9 @@
                     <p>Iglesia Santísima Virgen<br>Te esperamos el</p>
                     
                     <div class="date-time-box">
-                        <div class="date">27 SEP</div>
+                        <div class="date">01 de Junio</div>
                         <div class="divider"></div>
-                        <div class="time">19:00 P.M.</div>
+                        <div class="time">01:00 P.M.</div>
                     </div>
                     
                     <p class="address">Avenida Uno 118,<br>Ciudad de lugar, País</p>
@@ -93,9 +94,9 @@
                     </div>
                     <h2>CELEBRACIÓN</h2>
                     <div class="date-time-box">
-                        <div class="date">27 SEP</div>
+                        <div class="date">01 de Junio</div>
                         <div class="divider"></div>
-                        <div class="time">20:00 P.M.</div>
+                        <div class="time">01:00 P.M.</div>
                     </div>
                     <p class="address">Avenida Dos 3108,<br>Ciudad de lugar, País</p>
                     <a href="#" class="btn-primary">VER UBICACIÓN</a>
@@ -105,17 +106,8 @@
                     <div class="icon-container scroll-animate icon-animate">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v4M8 4l4 4 4-4M6 10h12v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V10z"/></svg>
                     </div>
-                    <h2>DRESSCODE</h2>
+                    <h2>Código de Vestimenta</h2>
                     <p class="address">Formal • No niños</p>
-                </section>
-
-                <section class="share-photos">
-                    <div class="icon-container scroll-animate icon-animate">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                    </div>
-                    <h2 style="color: #fff;">COMPARTE FOTOS</h2>
-                    <p style="color: #fff;">¡Sube fotos de la boda al álbum!</p>
-                    <a href="#" class="btn-outline">SUBIR FOTO</a>
                 </section>
 
                 <section class="gallery-section">
@@ -141,27 +133,124 @@
                 <section class="rsvp-section">
                     <h2>CONFIRMAR<br>ASISTENCIA</h2>
                     <p class="address" style="margin-bottom: 20px;">Por favor, confirma tu asistencia</p>
-                    
+
+                    <div data-fs-success style="display: none; padding: 15px; background: #e8f5e9; color: #2e7d32; border-radius: 4px; margin-bottom: 15px; font-weight: 600;">
+                        ¡Gracias! Tus datos han sido enviados correctamente.
+                    </div>
+                    <div data-fs-error style="display: none; padding: 15px; background: #ffebee; color: #c62828; border-radius: 4px; margin-bottom: 15px; font-weight: 600;">
+                        Hubo un error al enviar tu respuesta. Revisa los campos.
+                    </div>
+
                     <form id="rsvp-form" class="rsvp-form">
-                        <input type="text" placeholder="Nombre y apellido" required>
+                        <input type="text" name="Nombre" placeholder="Nombre y apellido" required data-fs-field>
+                        <span data-fs-error="Nombre" style="color: #c62828; font-size: 0.8rem; text-align: left; display: block; margin-top: -10px;"></span>
                         
-                        <select required>
+                        <select name="Asistencia" required data-fs-field>
                             <option value="" disabled selected>¿Asistirás?</option>
-                            <option value="si">Sí, asistiré</option>
-                            <option value="no">No podré asistir</option>
+                            <option value="Sí, asistiré">Sí, asistiré</option>
+                            <option value="No podré asistir">No podré asistir</option>
                         </select>
+                        <span data-fs-error="Asistencia" style="color: #c62828; font-size: 0.8rem; text-align: left; display: block; margin-top: -10px;"></span>
                         
-                        <textarea placeholder="Escribe tu mensaje" rows="3"></textarea>
+                        <textarea name="Mensaje" placeholder="Escribe tu mensaje" rows="3" data-fs-field></textarea>
                         
-                        <button type="submit" class="btn-primary" style="width: 100%; border:none;">ENVIAR RESPUESTA</button>
+                        <button type="submit" class="btn-primary" style="width: 100%; border:none;" data-fs-submit-btn>ENVIAR RESPUESTA</button>
                     </form>
                 </section>
 
             </div>
         </main>
-
     </div>
 
-    <script src="script.js"></script>
+    <script>
+      window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+      formspree('initForm', { formElement: '#rsvp-form', formId: 'mvzyzwnl' });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelopeWrapper = document.getElementById('envelope-wrapper');
+            const cardPage = document.getElementById('card-page');
+            const bgMusic = document.getElementById('bg-music');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+
+            // === ANIMACIÓN DEL SOBRE ===
+            envelopeWrapper.addEventListener('click', () => {
+                if(envelopeWrapper.classList.contains('open')) return;
+                
+                envelopeWrapper.classList.add('open');
+                
+                setTimeout(() => {
+                    envelopeWrapper.classList.add('extract');
+                }, 600);
+                
+                setTimeout(() => {
+                    envelopeWrapper.classList.add('fade-out');
+                    cardPage.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        cardPage.classList.add('show');
+                        document.body.style.overflow = 'auto'; 
+                        
+                        bgMusic.play().then(() => {
+                            playPauseBtn.innerHTML = '⏸';
+                        }).catch(e => {
+                            playPauseBtn.innerHTML = '▶';
+                        });
+                    }, 50);
+                }, 1800);
+            });
+
+            // === REPRODUCTOR DE AUDIO ===
+            playPauseBtn.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    playPauseBtn.innerHTML = '⏸';
+                } else {
+                    bgMusic.pause();
+                    playPauseBtn.innerHTML = '▶';
+                }
+            });
+
+            // === CUENTA REGRESIVA ===
+            const countdownDate = new Date(2026, 8, 27, 19, 0, 0).getTime();
+            const updateCountdown = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(updateCountdown);
+                    document.getElementById('cd-days').innerText = "00";
+                    document.getElementById('cd-hours').innerText = "00";
+                    document.getElementById('cd-minutes').innerText = "00";
+                    document.getElementById('cd-seconds').innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = days < 10 ? "0" + days : days;
+                document.getElementById('cd-hours').innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById('cd-minutes').innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById('cd-seconds').innerText = seconds < 10 ? "0" + seconds : seconds;
+            }, 1000);
+
+            // === ANIMACIONES AL HACER SCROLL ===
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.15 });
+
+            document.querySelectorAll('.scroll-animate').forEach(el => scrollObserver.observe(el));
+        });
+    </script>
 </body>
 </html>
