@@ -178,7 +178,7 @@ p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6;
     height: 60px;
     object-fit: contain;
     display: block;
-    opacity: 80%;
+    opacity: 1000%;
     transition: opacity 0.3s ease;
 }
 
@@ -191,9 +191,9 @@ p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6;
 /* Botones con Variable Verde */
 .btn-primary { 
     display: inline-block; 
-    background-color: #b79347; 
+    background-color: #00206d; 
     color: #ffffff; 
-    border: 1px solid #b79347; 
+    border: 1px solid #00206d; 
     text-decoration: none; 
     padding: 12px 25px; 
     border-radius: 4px; 
@@ -207,8 +207,8 @@ p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6;
 .btn-outline { 
     display: inline-block; 
     background-color: transparent;
-    border: 1px solid #b79347; 
-    color: #b79347; 
+    border: 1px solid #00206d; 
+    color: #00206d; 
     text-decoration: none; 
     padding: 12px 25px; 
     border-radius: 4px; 
@@ -219,7 +219,7 @@ p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6;
     transition: all 0.3s ease;
 }
 .btn-outline:hover { 
-    background-color: #b79347; 
+    background-color: #00206d; 
     color: #ffffff; 
 }
 
@@ -273,4 +273,21 @@ p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6;
     .wax-seal { top: 130px; width: 60px; height: 60px; }
     
     .envelope-wrapper.extract .card-preview { transform: translateY(-130px); }
+}
+
+.card-preview-border {
+    width: 100%; 
+    height: 100%; 
+    border: 1px solid var(--accent-green);
+    display: flex; 
+    flex-direction: column;  /* Apila imagen y texto de arriba a abajo */
+    justify-content: flex-start;
+    align-items: center;     /* Centra todo horizontalmente */
+}
+
+.preview-image {
+    width: 130px;          /* Ajusta este valor para el tamaño deseado */
+    height: auto;          
+    object-fit: contain;   /* Evita que tu imagen se deforme */
+    max-height: 120px;     /* Limita el alto para que no se salga de la tarjeta */
 }
