@@ -16,8 +16,7 @@
             <div class="card-preview">
                 <div class="card-preview-border">
                     <img src="10aniversario.png" alt="Aniversario" class="preview-image">
-                     <!--<span>Nuestro Aniversario</span>-->
-                </div>
+                     </div>
             </div>
             
             <div class="envelope-front"></div>
@@ -31,7 +30,7 @@
             <div class="mobile-layout">
                 
                 <header class="hero-section">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop" alt="Nosotros en la playa" class="hero-img">
+                    <img src="portada.png" alt="Nosotros en la playa" class="hero-img">
                 </header>
 
                 <section class="audio-section">
@@ -75,7 +74,6 @@
                     <div class="icon-container scroll-animate icon-animate">
                         <img src="brindiscopas.png" alt="Brindis" class="icon-image">
                     </div>
-                    <!-- <h2>Un día para Celebrar</h2> -->
                     <p>Hoy queremos celebrar contigo<br>este Décimo Aniversario,<br>un momento especial para agradecer,<br>recordar y seguir soñando juntos.</p>
                     <br>
                     <p>Te esperamos para compartir<br>esta celebración llena de<br>significado y emoción.</p>
@@ -92,7 +90,6 @@
                         <div class="divider"></div>
                         <div class="time">01:00 P.M.</div>
                     </div>
-                    <!-- <p class="address">Sunsol Unik,<br>Ciudad de lugar, País</p> -->
                     <a href="https://www.google.com/maps/dir/Centro+Comercial+Galerias+Fente,+Av.+4+de+Mayo,+Porlamar+6301,+Nueva+Esparta/SunSol+Unik,+Av.+interna+Parque+Costazul,+Pampatar+6301,+Nueva+Esparta/@10.9769777,-63.8514088,14z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x8c318ebf63bdddad:0x397bb413338e2c5e!2m2!1d-63.8407009!2d10.966557!1m5!1m1!1s0x8c318eff56e43721:0xdb3b7cbdaedbbf58!2m2!1d-63.8221792!2d10.9886665?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" class="btn-primary">VER UBICACIÓN</a>
                 </section>
 
@@ -107,22 +104,13 @@
                 <section class="gallery-section">
                     <h2>NOSOTROS</h2>
                     <div class="photo-grid">
-                        <img class="scroll-animate img-left" src="anosotros1.jpg" alt="Nosotros 1">
-                        <img class="scroll-animate img-right" src="anosotros2.jpg" alt="Nosotros 2">
-                        <img class="wide scroll-animate img-left" src="anosotros3.jpg" alt="Nosotros 3">
-                        <img class="scroll-animate img-right" src="anosotros4.jpg" alt="Nosotros 4">
-                        <img class="scroll-animate img-left" src="anosotros5.jpg" alt="Nosotros 5">
+                        <img class="scroll-animate img-left interactive-photo" src="anosotros1.jpg" data-alt-src="otrafoto1.jpg" alt="Nosotros 1">
+                        <img class="scroll-animate img-right interactive-photo" src="anosotros2.jpg" data-alt-src="otrafoto2.jpg" alt="Nosotros 2">
+                        <img class="wide scroll-animate img-left interactive-photo" src="anosotros3.jpg" data-alt-src="otrafoto3.jpg" alt="Nosotros 3">
+                        <img class="scroll-animate img-right interactive-photo" src="anosotros4.jpg" data-alt-src="otrafoto4.jpg" alt="Nosotros 4">
+                        <img class="scroll-animate img-left interactive-photo" src="anosotros5.jpg" data-alt-src="otrafoto5.jpg" alt="Nosotros 5">
                     </div>
                 </section>
-
-                <!-- <section class="gifts-section">
-                    <div class="icon-container scroll-animate icon-animate">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-                    </div>
-                    <h2>REGALOS</h2>
-                    <p class="address">Lo más importante es tu presencia,<br>pero si deseas hacernos un regalo aquí<br>tienes nuestros datos.</p>
-                    <a href="#" class="btn-primary">VER DATOS BANCARIOS</a>
-                </section> -->
 
                 <section class="rsvp-section">
                     <h2>CONFIRMAR<br>ASISTENCIA</h2>
@@ -231,6 +219,31 @@
                 document.getElementById('cd-minutes').innerText = minutes < 10 ? "0" + minutes : minutes;
                 document.getElementById('cd-seconds').innerText = seconds < 10 ? "0" + seconds : seconds;
             }, 1000);
+
+            // === GALERÍA INTERACTIVA (CLIC PARA CAMBIAR FOTO) ===
+            const interactivePhotos = document.querySelectorAll('.interactive-photo');
+
+            interactivePhotos.forEach(photo => {
+                photo.addEventListener('click', function() {
+                    // Si ya se está animando, evita clics repetidos rápidos
+                    if (this.classList.contains('is-animating')) return;
+
+                    // Inicia el movimiento de "hundirse"
+                    this.classList.add('is-animating');
+
+                    // Cambia la imagen en el punto medio de la animación
+                    setTimeout(() => {
+                        const currentSrc = this.getAttribute('src');
+                        const altSrc = this.getAttribute('data-alt-src');
+                        
+                        this.setAttribute('src', altSrc);
+                        this.setAttribute('data-alt-src', currentSrc);
+                        
+                        // Devuelve la foto a su tamaño normal
+                        this.classList.remove('is-animating');
+                    }, 300);
+                });
+            });
 
             // === ANIMACIONES AL HACER SCROLL ===
             const scrollObserver = new IntersectionObserver((entries, observer) => {
